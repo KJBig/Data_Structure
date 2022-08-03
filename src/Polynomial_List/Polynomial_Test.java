@@ -95,10 +95,43 @@ abstract class Polynomial{
 
     }
 
-    abstract void Eval(int n); // 다항식의 x에 숫자 대입한 값 반환
-    abstract void polyAdd(Polynomial p); // 다항식과 다항식의 합
+    int Eval(int n){
+       int result = 0;
+
+       for(int i = 0; i<this.size; i++){
+           result += (this.poly[i].coef * Math.pow(n, this.poly[i].exp));
+       }
+
+       return result;
+    }
+    void polyAdd(Polynomial p) { // 다항식과 다항식의 합
+        term[] temp = null;
+        if(this.poly.length > p.poly.length){
+            temp = new term[this.poly.length];
+        }else{
+            temp = new term[p.poly.length];
+        }
+
+        for(int i=0; i< this.poly.length; i++){
+            for(int j=0; j< p.poly.length; j++){
+
+            }
+        }
+
+    }
     abstract void polyMul(Polynomial p); // 다항식과 다항식의 고
-    abstract void print(); // 다항식 출력
+
+
+    void print() { // 다항식 출력
+        for(int i=0; i<this.size; i++){
+            if(this.poly[i].exp == 0){
+                System.out.print(this.poly[i].coef);
+            }else if(this.poly[i].exp == 1){
+                System.out.print(this.poly[i].coef+"x");
+            }else{
+            System.out.print(this.poly[i].coef+"x^"+this.poly[i].exp);
+        }
+    }
 
 
 }
