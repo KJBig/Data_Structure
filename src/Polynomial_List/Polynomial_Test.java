@@ -12,5 +12,9 @@ public class Polynomial_Test {
         p1.addTerm(3,3);
 
         p1.print();
+
+        p1.delTerm(1);
+
+        p1.print();
     }
 }

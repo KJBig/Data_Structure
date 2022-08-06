@@ -20,24 +20,6 @@ class Polynomial {
         }
     }
 
-    int coef(Polynomial P, int n) {
-        return P.poly[n].coef;
-    }
-
-    term maxExp() { // exp가 가장 높은 항 반환
-        int max = 0;
-        int max_n = 0;
-
-        for (int i = 0; i < size; i++) {
-            if (max < poly[i].exp) {
-                max = poly[i].exp;
-                max_n = i;
-            }
-        }
-
-        return poly[max_n];
-    }
-
     term[] increaseSize() {
         term[] temp = new term[++this.size];
 
@@ -55,44 +37,52 @@ class Polynomial {
         term t1 = new term(coef, exp);
 
         this.poly[++now] = t1;
+        this.order();
     }
-    void addTerm(int coef) { // 다항식에 항 추가
+    void addTerm(int coef) { // 다항식에 항 추가 ( 상수항의 경우 )
         if (this.size == 0 || this.poly[size - 1] != null) {
             this.poly = increaseSize();
         }
         term t1 = new term(coef);
 
         this.poly[++now] = t1;
+        this.order();
     }
 
-    term delTerm(int exp) { // 다항식에 항 제거, 제거된 항 반환
-        term temp = null;
-        int target = 0;
+    void delTerm(int n) { // n번째 항 삭제
+        term temp = this.poly[n];
 
-        for (int i = 0; i < size; i++) {
-            if (this.poly[i].exp == exp) {
-                temp.exp = this.poly[i].exp;
-                temp.coef = this.poly[i].coef;
-
-                target = i;
-
-                break;
-            }
+        for(int i=n; i<this.now; i++){
+            this.poly[n] = this.poly[n+1];
         }
+        now--;
 
-        for (int i = target; this.poly[i] != null; i++) {
-            this.poly[i].exp = this.poly[i + 1].exp;
-            this.poly[i].coef = this.poly[i + 1].coef;
+        System.out.println(temp.coef + ", " + temp.exp);
 
-            if (i < size - 2) {
-                this.poly[size - 1] = null;
-                break;
+    }
+
+    void order(){
+        term max;
+        int max_where = 0;
+
+        term temp;
+
+        for(int i=0; i<this.poly.length; i++){
+            max = this.poly[i];
+
+            for(int j=i+1; j<this.poly.length; j++){
+                if(this.poly[j].exp > max.exp){
+                    max = this.poly[j];
+                    max_where = j;
+                }
             }
+
+            temp = max;
+
+            this.poly[max_where] = this.poly[i];
+            this.poly[i] = temp;
+
         }
-
-
-        return temp;
-
     }
 
     int Eval(int n) {
@@ -130,7 +120,7 @@ class Polynomial {
 
 
     void print() { // 다항식 출력
-        for (int i = 0; i < this.size; i++) {
+        for (int i = 0; i <= this.now; i++) {
             if(i != 0){
                 if(this.poly[i].coef > 0 ){
                     System.out.print("+");
@@ -147,10 +137,10 @@ class Polynomial {
 
 
         }
+        System.out.println();
 
 
     }
 }
-
 
 
