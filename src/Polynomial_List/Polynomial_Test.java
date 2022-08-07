@@ -10,7 +10,9 @@ public class Polynomial_Test {
         System.out.println(p1.isEmpty());
         p1.addTerm(-3, 1);
         p1.addTerm(3,3);
+        p1.addTerm(4,3);
 
         p1.print();
+
     }
 }
