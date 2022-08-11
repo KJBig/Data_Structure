@@ -54,7 +54,7 @@ class Polynomial {
 
         this.poly[++now] = t1;
         this.order();
-        //this.arrange();
+        this.arrange();
     }
 
     // n번째 항 삭제
@@ -96,19 +96,28 @@ class Polynomial {
     void arrange(){
 
         for(int i=0; i<=this.now; i++){
-            for (int j=0; j<=this.now; j++){
+            for (int j=i+1; j<=this.now; j++){
                 if(this.poly[i].exp == this.poly[j].exp){
                     this.poly[i].coef += this.poly[j].coef;
                     for (int k=j; k<this.now; k++){
                         this.poly[k] = this.poly[k+1];
+                        this.test_p();
                     }
-                    this.poly[now] = null;
-                    now--;
+                    this.poly[now--] = null;
+
                 }
             }
 
         }
 
+    }
+
+    void test_p(){
+        System.out.println("==============");
+        for (int i = 0; i<=now; i++){
+            System.out.println("["+ i + "] :" +  this.poly[i].coef + ", " + this.poly[i].exp);
+        }
+        System.out.println("==============");
     }
 
     // 다항식 x값에 상수 대입

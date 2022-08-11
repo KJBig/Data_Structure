@@ -11,6 +11,7 @@ public class Polynomial_Test {
         p1.addTerm(-3, 1);
         p1.addTerm(3, 3);
         p1.addTerm(4, 3);
+        p1.addTerm(4,1);
 
         p1.print();
 
