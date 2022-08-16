@@ -111,7 +111,7 @@ class Polynomial {
         }
 
     }
-
+    /*
     void test_p(){
         System.out.println("==============");
         for (int i = 0; i<=now; i++){
@@ -119,6 +119,8 @@ class Polynomial {
         }
         System.out.println("==============");
     }
+
+     */
 
     // 다항식 x값에 상수 대입
     int Eval(int n) {
